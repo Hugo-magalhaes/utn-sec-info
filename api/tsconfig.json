@@ -1,0 +1,26 @@
+{
+  "extends": "@tsconfig/node16/tsconfig.json",
+
+  "compilerOptions": {
+    "outDir": "dist",
+    "baseUrl": "./src",
+    "paths": {
+      "@api/*": ["api/*"],
+      "@application/*": ["application/*"],
+      "@domain/*": ["domain/*"],
+      "@infrastructure/*": ["infrastructure/*"]
+    },
+    "typeRoots": ["./src/global.d.ts", "./node_modules/@types"],
+    "target": "es5",
+    "lib": ["es6", "dom", "es2017"],
+    "types": ["node", "reflect-metadata"],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "emitDecoratorMetadata": true,
+    "resolveJsonModule": true
+  },	
+  "include": ["src/**/*"],	
+  "exclude": ["node_modules"]
+}
