@@ -3,6 +3,6 @@
 </template>
 
 <script lang="ts" setup>
-const message = "Otra vista";
+const message = "Other View";
 
 </script>

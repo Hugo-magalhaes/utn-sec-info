@@ -1,14 +1,15 @@
 <template>
-  <v-app :theme="theme">
-    <v-app-bar>
+  <v-app :theme="auth.theme">
+    <v-app-bar v-if="auth.isLogged">
       <nav>
-        <router-link to="/">Home</router-link> |
-        <router-link to="/more">More</router-link>
+        <v-btn @click="auth.toggleTheme">
+          Toggle Theme
+        </v-btn>
       </nav>
       <v-spacer></v-spacer>
 
-      <v-btn @click="toggleTheme">
-        Toggle Theme
+      <v-btn @click="auth.logout">
+        Log out
       </v-btn>
     </v-app-bar>
 
@@ -21,14 +22,14 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
-import { Themes } from '@/plugin/vuetify/Themes'
+import { useAuthStore } from '@/stores/auth-store';
+import { onMounted } from 'vue';
 
-const theme = ref(Themes.Light)
+const auth = useAuthStore();
 
-const toggleTheme = () => {
-  theme.value = theme.value === Themes.Light ? Themes.Dark : Themes.Light
-}
+onMounted(async () => {
+  auth.checkLogin();
+})
 
 </script>
 
