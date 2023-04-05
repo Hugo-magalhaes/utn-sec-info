@@ -1,20 +1,17 @@
-import { NextFunction, Request, Response } from "express";
+import cors from "cors";
 
-export default (req: Request, res: Response, next: NextFunction) => {
-    if (req.headers.origin != process.env.UI_URL) next();
-    
-    // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', process.env.UI_URL);
+const ERROR_CORS = "Blocked by CORS"
 
-    // Request methods you wish to allow
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE, OPTIONS');
+const options = {
+    origin: (origin: any, callback: any) => {
+        if (origin && origin != process.env.UI_URL) {
+            return callback(new Error(ERROR_CORS));
+        }
 
-    // Request headers you wish to allow
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
+        callback(null, true);
+    },
+    credentials: true,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+};
 
-    // Set to true if you need the website to include cookies in the requests sent
-    // to the API (e.g. in case you use sessions)
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
-
-    next();
-}
+export default cors(options);
