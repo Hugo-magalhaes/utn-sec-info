@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { HealthCheck } from "@api/controller/public";
+import { Create } from "@api/controller/user";
 
 const router = Router();
  
-router.get('/', HealthCheck);
+router.post('/user', Create);
 
 export default router;
