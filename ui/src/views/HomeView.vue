@@ -4,12 +4,12 @@
 
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue';
-import { verifyApiHealthCheck } from '@/services/public-api';
+import { apiHealthCheck } from '@/services/api-health-check';
 
 let message = ref("...");
 
 onMounted(async () => {
-  const response = await verifyApiHealthCheck();
+  const response = await apiHealthCheck();
   message.value = response.data.message;
 })
 

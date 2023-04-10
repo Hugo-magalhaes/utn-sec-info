@@ -5,6 +5,12 @@
         <v-btn @click="auth.toggleTheme">
           Toggle Theme
         </v-btn>
+        <v-btn to="/">
+          Home
+        </v-btn>
+        <v-btn to="/user/create">
+          Create User
+        </v-btn>
       </nav>
       <v-spacer></v-spacer>
 

@@ -64,7 +64,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { SubmitEventPromise } from 'vuetify/lib/framework.mjs';
-import { UserLoginRequest } from '@/services/public-api';
+import { LogInRequest } from '@/services/auth-api/login';
 import { useAuthStore } from '@/stores/auth-store';
 
 const auth = useAuthStore();
@@ -73,7 +73,7 @@ const showError = ref(false);
 const errorMessage = ref(false);
 const isValid = ref(false);
 
-const user = ref(new UserLoginRequest());
+const user = ref(new LogInRequest());
 
 const userRules = ref({
   name: [
@@ -91,8 +91,8 @@ const login = async (event: SubmitEventPromise) => {
 
     await auth.login(user.value);
   } catch(error: any) {
-    showError.value = true;
     errorMessage.value = error?.response?.data ?? 'Unexpected Error. Contact your admin!';
+    showError.value = true;
   }
 };
 
