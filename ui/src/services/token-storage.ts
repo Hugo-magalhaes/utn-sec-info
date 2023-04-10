@@ -1,13 +1,15 @@
+const STORAGE_KEY = 'token';
+
 const tokenSave = (token: string) => {
-    localStorage.setItem('token', token);
+    localStorage.setItem(STORAGE_KEY, token);
 }
 
 const tokenRestore = (): string|null => {
-    return localStorage.getItem('token');
+    return localStorage.getItem(STORAGE_KEY);
 }
 
 const tokenClear = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem(STORAGE_KEY);
 }
 
 export {
