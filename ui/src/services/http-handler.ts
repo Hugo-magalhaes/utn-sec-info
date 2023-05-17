@@ -10,7 +10,8 @@ const HttpHandler = axios.create({
 
 HttpHandler.interceptors.request.use(config => {
     const token = tokenRestore();
-    config.headers.Authorization = `Bearer ${token}`;
+    const tokenRecaptcha = localStorage.getItem("recaptchaToken");
+    config.headers.Authorization = `Bearer ${token} Bearer2 ${tokenRecaptcha}`;
 
     return config;
 });
@@ -18,12 +19,12 @@ HttpHandler.interceptors.request.use(config => {
 HttpHandler.interceptors.response.use(
     response => response,
     error => {
-        if(error.response.status != 401) return error;
-        
+        if (error.response.status != 401) return error;
+
         const auth = useAuthStore();
         auth.logout();
-        
+
         throw Error('Login redirect');
-});
+    });
 
 export { HttpHandler };
