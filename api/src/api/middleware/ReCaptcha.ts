@@ -23,8 +23,9 @@ export default async (req: Request, res: Response, next: NextFunction) => {
         });
 
         const isValidToken = response?.data?.success && SCORE_GOOGLE_RECAPTCHA && response.data.score && response.data.score > SCORE_GOOGLE_RECAPTCHA;
-
         if (isValidToken) {
+            console.log(isValidToken)
+            console.log(response.data.score)
             next();
         } else {
             res.status(404).send(RECAPTCHA_ERROR_VALIDATION);
